@@ -1,0 +1,4 @@
+<launch>
+  <node pkg="lifecycle_pkg" exec="my_talker" name="my_talker"/>
+  <node pkg="lifecycle_pkg" exec="lifecycle_manager"/>
+</launch>
