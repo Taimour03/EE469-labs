@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="le1_py_pkg" exec="integer_publisher" name="integer_publisher"/>
+  <node pkg="le1_py_pkg" exec="cumulative_adder" name="cumulative_adder"/>
+  <node pkg="le1_py_pkg" exec="le1_lifecycle_manager"/>
+</launch>
