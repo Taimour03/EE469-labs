@@ -25,6 +25,7 @@ setup(
     entry_points={
         'console_scripts': [
             'my_talker = lifecycle_pkg.my_talker:main',
+            'lifecycle_manager = lifecycle_pkg.lifecycle_manager:main',
         ],
     },
 )
