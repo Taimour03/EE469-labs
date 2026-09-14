@@ -1,0 +1,35 @@
+Tool used: Claude (via Cowork)
+
+Prompt:
+
+im working on lab 2 exercise 2 for ee469, need to build a ros2 package
+called le2_py_pkg with lifecycle nodes.
+
+need 3 files:
+
+1. sensor_driver_node.py - lifecycle node called sensor_driver_node that
+just simulates a sensor, publish a random float between 0.1 and 5.0 on
+raw_sensor_data every 0.5 sec with a timer. start it in on_activate, stop
+in on_deactivate, clean up the publisher/timer in on_cleanup and
+on_shutdown
+
+2. sensor_processor_node.py - lifecycle node called sensor_processor_node,
+subscribes to raw_sensor_data, runs a moving average over the last 5
+values, publishes the filtered result on processed_sensor_data. same
+cleanup pattern as above
+
+3. le2_lifecycle_manager.py - manager node that configures then activates
+sensor_driver_node then sensor_processor_node on startup, and on ctrl+c
+does deactivate/cleanup/shutdown in reverse order (processor first). use
+the ChangeState service client like the tutorial one does
+
+also need a launch file that starts all three together
+
+and make all three handle ctrl+c properly so the manager actually gets to
+run its shutdown sequence instead of everything just dying immediately
+
+after getting the code i built it with colcon, launched it and checked the
+nodes came up in the right order (driver before processor), checked both
+topics were actually publishing with ros2 topic list/echo, used rqt_plot to
+compare the raw vs filtered data, and tested ctrl+c to make sure shutdown
+happens in reverse order before the processes exit.
