@@ -15,8 +15,8 @@ class CumulativeAdderNode(LifecycleNode):
 
     def on_configure(self, previous_state: LifecycleState):
         self.get_logger().info(f"Node '{self.get_name()}' is in state '{previous_state.label}', executing on_configure")
-        self.publisher_ = self.create_lifecycle_publisher(Int64, "cumulative_sum", 10)
-        self.subscriber_ = self.create_subscription(Int64, "integer_count", self.callback_integer, 10)
+        self.publisher_ = self.create_lifecycle_publisher(Int64, "integer_sum", 10)
+        self.subscriber_ = self.create_subscription(Int64, "integer", self.callback_integer, 10)
         return TransitionCallbackReturn.SUCCESS
 
     def on_activate(self, previous_state: LifecycleState):

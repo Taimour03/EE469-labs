@@ -6,17 +6,15 @@ from example_interfaces.msg import Int64
 import signal
 import time
 _SIGINT_GRACE_PERIOD_SEC = 5.0
-MANAGED_NODES = ['integer_publisher', 'cumulative_adder']
 
 class IntegerPublisherNode(LifecycleNode):
     def __init__(self):
         super().__init__("integer_publisher")  # must match MANAGED_NODES
-        self.counter_ = 0
         self.finalized = False
 
     def on_configure(self, previous_state: LifecycleState):
         self.get_logger().info(f"Node '{self.get_name()}' is in state '{previous_state.label}', executing on_configure")
-        self.publisher_ = self.create_lifecycle_publisher(Int64, "integer_count", 10)
+        self.publisher_ = self.create_lifecycle_publisher(Int64, "integer", 10)
         self.timer_ = self.create_timer(0.5, self.publish_integer)
         return TransitionCallbackReturn.SUCCESS
 
@@ -42,9 +40,8 @@ class IntegerPublisherNode(LifecycleNode):
         return TransitionCallbackReturn.SUCCESS
 
     def publish_integer(self):
-        self.counter_ += 1
         msg = Int64()
-        msg.data = self.counter_
+        msg.data = 5
         self.publisher_.publish(msg)
         self.get_logger().info(str(msg.data))
 
