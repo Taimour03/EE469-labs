@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="le2_py_pkg" exec="sensor_driver_node" name="sensor_driver_node"/>
+  <node pkg="le2_py_pkg" exec="sensor_processor_node" name="sensor_processor_node"/>
+  <node pkg="le2_py_pkg" exec="le2_lifecycle_manager" name="le2_lifecycle_manager"/>
+</launch>
