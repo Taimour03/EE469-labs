@@ -1,0 +1,17 @@
+
+Tool used: Claude (via Cowork)
+
+Prompt:
+
+I need a ROS2 Jazzy C++ node that will display the following output:
+[INFO] [1657220023.167997687] [ex_test]: Hello World
+[INFO] [1657220023.669854317] [ex_test]: Count 1
+[INFO] [1657220024.171190089] [ex_test]: Count 2
+[INFO] [1657220024.670094647] [ex_test]: Count 3
+[INFO] [1657220025.170502002] [ex_test]: Count 4
+[INFO] [1657220025.668974214] [ex_test]: Count 5
+[INFO] [1657220026.169096701] [ex_test]: Count 6
+[INFO] [1657220026.670881779] [ex_test]: Count 7
+This example shows only the first 7 counts, but the node should continuously
+generate counts two times a second until the execution is killed with a Ctrl C.
+The node program should be named example_node.cpp.
