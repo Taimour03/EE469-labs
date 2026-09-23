@@ -1,0 +1,24 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 25
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    arm_controller:
+      type: forward_command_controller/ForwardCommandController
+
+arm_controller:
+  ros__parameters:
+    joints:
+      - lower_arm_joint
+      - upper_arm_joint
+    interface_name: "position"
+
+    # Note that 
+    #joints:
+    #  - lower_arm_joint
+    #  - upper_arm_joint
+
+    #could be replaced with
+    #joints: ["lower_arm_joint", "upper_arm_joint"]
