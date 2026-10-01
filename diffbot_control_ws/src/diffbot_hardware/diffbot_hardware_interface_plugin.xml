@@ -1,0 +1,9 @@
+<library path="diffbot_hardware">
+    <class name="my_diffbot_hardware/DiffbotHardwareInterface"
+           type="my_diffbot_hardware::DiffbotHardwareInterface"
+           base_class_type="hardware_interface::SystemInterface">
+        <description>
+            Hardware interface for a differential drive robot with 2 Dynamixel motors
+        </description>
+    </class>
+</library>

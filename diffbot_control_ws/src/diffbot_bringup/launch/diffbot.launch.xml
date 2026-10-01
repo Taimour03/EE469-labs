@@ -1,10 +1,11 @@
 <launch>
+  <arg name="diffbot_mock_hardware" default="true"/>
     <let name="urdf_path" 
          value="$(find-pkg-share diffbot_description)/urdf/diffbot.urdf.xacro" />
     <let name="rviz_config_path"
          value="$(find-pkg-share diffbot_description)/rviz/diffbot_config.rviz" />
     <let name="diffbot_description"
-         value="$(command 'xacro $(var urdf_path)')" />
+         value="$(command 'xacro $(var urdf_path) diffbot_mock_hardware:=$(var diffbot_mock_hardware)')" />
 
     <node pkg="robot_state_publisher" exec="robot_state_publisher">
         <param name="robot_description" value="$(var diffbot_description)" />

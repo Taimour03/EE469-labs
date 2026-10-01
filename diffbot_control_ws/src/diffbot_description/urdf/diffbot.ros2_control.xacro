@@ -1,10 +1,20 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+    <xacro:arg name="diffbot_mock_hardware" default="true"/>
+
     <ros2_control name="DiffbotHardware" type="system">
     <hardware>
-        <plugin>mock_components/GenericSystem</plugin>
-        <param name="calculate_dynamics">true</param>
+        <xacro:if value="$(arg diffbot_mock_hardware)">
+            <plugin>mock_components/GenericSystem</plugin>
+            <param name="calculate_dynamics">true</param>
+        </xacro:if>
+        <xacro:unless value="$(arg diffbot_mock_hardware)">
+            <plugin>my_diffbot_hardware/DiffbotHardwareInterface</plugin>
+            <param name="left_dnmxl_id">2</param>
+            <param name="right_dnmxl_id">4</param>
+            <param name="dynamixel_port">/dev/ttyACM0</param>
+        </xacro:unless>
     </hardware>
     <joint name="right_wheel_joint">
         <command_interface name="velocity"/>
