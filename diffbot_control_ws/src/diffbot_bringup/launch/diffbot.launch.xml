@@ -1,0 +1,22 @@
+<launch>
+    <let name="urdf_path" 
+         value="$(find-pkg-share diffbot_description)/urdf/diffbot.urdf.xacro" />
+    <let name="rviz_config_path"
+         value="$(find-pkg-share diffbot_description)/rviz/diffbot_config.rviz" />
+    <let name="diffbot_description"
+         value="$(command 'xacro $(var urdf_path)')" />
+
+    <node pkg="robot_state_publisher" exec="robot_state_publisher">
+        <param name="robot_description" value="$(var diffbot_description)" />
+    </node>
+
+    <node pkg="controller_manager" exec="ros2_control_node">
+        <param from="$(find-pkg-share diffbot_bringup)/config/diffbot_controllers.yaml" />
+    </node>
+
+    <node pkg="controller_manager" exec="spawner" args="joint_state_broadcaster" />
+
+    <node pkg="controller_manager" exec="spawner" args="diff_base_controller" />
+
+    <node pkg="rviz2" exec="rviz2" output="screen" args="-d $(var rviz_config_path)" />
+</launch>
